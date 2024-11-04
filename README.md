@@ -1,2 +1,3 @@
 # fin-data-ingestion
-Data Ingestion for Stock Analysis
+
+This app does cool things.
