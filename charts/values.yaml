@@ -1,0 +1,34 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/<your-org>/<your-app>
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "250m"
+    memory: "256Mi"
+
+env:
+  - name: MY_APP_ENV
+    value: "production"
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: my-python-app.local
+      paths: ["/"]
+  tls: []
+
+secrets:
+  DATABASE_URL: "my_database_url"
+  API_KEY: "my_api_key"

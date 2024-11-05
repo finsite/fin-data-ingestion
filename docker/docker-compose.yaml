@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  stock-data-poller:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      QUEUE_TYPE: rabbitmq  # or 'sqs', 'ibm_mq'
+      STOCK_API: alphavantage
+      ALPHA_VANTAGE_API_KEY: your_alpha_vantage_api_key
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  stock-data-consumer:
+    build:
+      context: ./consumer  # Assuming a separate folder for the consumer Dockerfile
+      dockerfile: Dockerfile
+    environment:
+      QUEUE_TYPE: rabbitmq
+    depends_on:
+      - rabbitmq

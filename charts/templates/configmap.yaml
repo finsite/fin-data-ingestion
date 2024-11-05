@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  APP_CONFIG: "some_config_value"
+  OTHER_SETTING: "another_value"

@@ -1,1 +1,6 @@
+boto3
+ibm_boto3
 pytest
+pika
+requests
+time
